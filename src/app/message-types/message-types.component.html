@@ -1,0 +1,11 @@
+<p>Message types view:</p>
+<ul>
+  <li *ngFor="let repo of repos">
+    {{ repo.name }}
+    <ul>
+      <li *ngFor="let messageType of repo.messageTypes">
+        {{ messageType.name }}
+      </li>
+    </ul>
+  </li>
+</ul>
