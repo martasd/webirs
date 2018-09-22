@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'webirs';
+  title = 'WebIRS: mapper for the 21st century';
 }
