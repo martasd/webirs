@@ -1,0 +1,26 @@
+<p>
+  Structure mapper view:
+</p>
+<p>Source structure:</p>
+<ul>
+  <li>
+    {{ source.node.name }}
+    <ul>
+      <li *ngFor="let node of source.node.nodes">
+        {{ node.name }}
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Target structure:</p>
+<ul>
+  <li>
+    {{ target.node.name }}
+    <ul>
+      <li *ngFor="let node of target.node.nodes">
+        {{ node.name }}
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -9,7 +9,7 @@ import { Repo } from '../repo';
 })
 export class MessageTypesComponent implements OnInit {
 
-  mtList = [ new MessageType('mt103', null)];
+  mtList = [ new MessageType('mt103', null, null, null)];
 
   repos = [
     new Repo('gateIn', this.mtList),
