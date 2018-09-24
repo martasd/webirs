@@ -1,0 +1,7 @@
+<p> Node component view:</p>
+<p> {{ node.name }} </p>
+<ul *ngIf="node.children">
+  <li *ngFor="let child of node.children">
+    <app-node [node]="child"></app-node>
+  </li>
+</ul>

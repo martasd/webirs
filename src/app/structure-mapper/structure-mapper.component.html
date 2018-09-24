@@ -3,10 +3,10 @@
 </p>
 <p>Source structure:</p>
 <p>
-    {{ source.node.name }}
+    {{ source.root.name }}
 </p>
 <ul>
-  <li *ngFor="let node of source.node.nodes">
+  <li *ngFor="let node of source.root.children">
     {{ node.name }}
   </li>
 </ul>
@@ -16,7 +16,10 @@
   {{ target.node.name }}
 </p>
 <ul>
-  <li *ngFor="let node of target.node.nodes">
+  <li *ngFor="let node of target.root.children">
     {{ node.name }}
   </li>
 </ul>
+
+
+<app-node [node]="source.root"></app-node>

@@ -1,9 +1,9 @@
-import { Node, NodeType } from 'src/app/node';
 import { Mapping } from './mapping';
+import { Node, NodeType } from './node';
 
 export class Block extends Node {
 
-  constructor(name: string, mappings: Mapping[], nodes: Node[]) {
-    super(name, NodeType.Block, mappings, nodes);
+  constructor(name: string, mappings: Mapping[], children: Node[]) {
+    super(name, NodeType.Block, mappings, children);
   }
 }

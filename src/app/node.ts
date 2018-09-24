@@ -8,6 +8,6 @@ export abstract class Node {
     public name: string,
     public type: NodeType,
     public mappings: Mapping[],
-    public nodes: Node[] // children
+    public children: Node[]
     ) {}
 }
