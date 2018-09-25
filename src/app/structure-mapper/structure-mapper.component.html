@@ -13,7 +13,7 @@
 
 <p>Target structure:</p>
 <p>
-  {{ target.node.name }}
+  {{ target.root.name }}
 </p>
 <ul>
   <li *ngFor="let node of target.root.children">
@@ -22,4 +22,5 @@
 </ul>
 
 
+<p> Node component view:</p>
 <app-node [node]="source.root"></app-node>

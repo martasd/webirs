@@ -11,16 +11,19 @@ import { TargetStructure } from '../target-structure';
 })
 export class StructureMapperComponent implements OnInit {
   sourceChildren = [
-    new Block('nick', null, null),
-    new Block('kevin', null, null)
+    new Block('nick', [ new Block ('nick\'s child1', [ new Block ('nick\'s grandchild1', null),
+    new Block ('nick\'s grandchild2', null)]),
+    new Block ('nick\'s child2', null)]),
+    new Block('kevin', [ new Block ('kevin\'s child1', null),
+    new Block ('kevin\'s child2', null)])
   ];
   targetChildren = [
-    new Block('roger', null, null),
-    new Block('novak', null, null)
+    new Block('roger', null),
+    new Block('novak', null)
   ];
 
-  sourceRoot = new Block('john', null, this.sourceChildren);
-  targetRoot = new Block('bjorn', null, this.targetChildren);
+  sourceRoot = new Block('john', this.sourceChildren);
+  targetRoot = new Block('bjorn', this.targetChildren);
 
   source = new SourceStructure(this.sourceRoot);
   target = new TargetStructure(this.targetRoot);
@@ -29,8 +32,6 @@ export class StructureMapperComponent implements OnInit {
 
   constructor() {
 
-    this.sourceRoot.mappings = this.testMappings;
-    this.targetRoot.mappings = this.testMappings;
   }
 
   ngOnInit() {
