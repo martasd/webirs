@@ -1,26 +1,9 @@
 <p>
   Structure mapper view:
 </p>
+
 <p>Source structure:</p>
-<p>
-    {{ source.root.name }}
-</p>
-<ul>
-  <li *ngFor="let node of source.root.children">
-    {{ node.name }}
-  </li>
-</ul>
+<app-node [node]="source.root"></app-node>
 
 <p>Target structure:</p>
-<p>
-  {{ target.root.name }}
-</p>
-<ul>
-  <li *ngFor="let node of target.root.children">
-    {{ node.name }}
-  </li>
-</ul>
-
-
-<p> Node component view:</p>
-<app-node [node]="source.root"></app-node>
+<app-node [node]="target.root"></app-node>
