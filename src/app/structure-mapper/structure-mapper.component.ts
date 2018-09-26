@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Block } from '../block';
-import { Mapping } from '../mapping';
+import { Link } from '../link';
 import { SourceStructure } from '../source-structure';
 import { TargetStructure } from '../target-structure';
 
@@ -28,7 +28,7 @@ export class StructureMapperComponent implements OnInit {
   source = new SourceStructure(this.sourceRoot);
   target = new TargetStructure(this.targetRoot);
 
-  testMappings = [new Mapping(this.sourceRoot, this.targetRoot, null)];
+  testLinks = [ new Link(this.sourceRoot, this.targetRoot, null)];
 
   constructor() {
 

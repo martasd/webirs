@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Link } from '../link';
 import { Node } from '../node';
 
 @Component({
@@ -9,6 +10,7 @@ import { Node } from '../node';
 export class NodeComponent implements OnInit {
 
   @Input() node: Node;
+  @Input() allLinks: Link[];
 
   constructor() { }
 

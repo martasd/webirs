@@ -1,7 +1,7 @@
 import { Condition } from './condition';
 import { Node } from './node';
 
-export class Mapping {
+export class Link {
 
   constructor(
     public sourceNode: Node,

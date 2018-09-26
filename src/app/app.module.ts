@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { MessageTypesComponent } from './message-types/message-types.component';
 import { NodeComponent } from './node/node.component';
 import { StructureMapperComponent } from './structure-mapper/structure-mapper.component';
+import { FilterBySourcePipe } from './filter-by-source.pipe';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { StructureMapperComponent } from './structure-mapper/structure-mapper.co
     AppComponent,
     MessageTypesComponent,
     StructureMapperComponent,
-    NodeComponent
+    NodeComponent,
+    FilterBySourcePipe
   ],
   imports: [
     BrowserModule

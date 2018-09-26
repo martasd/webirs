@@ -1,6 +1,6 @@
-<p> {{ node.name }}</p>
+<p> {{ node.name }} => {{ allLinks | filterBySource: node }}</p>
 <ul *ngIf="node.children">
   <li *ngFor="let child of node.children">
-    <app-node [node]="child"></app-node>
+    <app-node [node]="child" [allLinks]="allLinks"></app-node>
   </li>
 </ul>
