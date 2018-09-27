@@ -1,8 +1,8 @@
-import { Node, NodeType } from './node';
+import { Node, NodeDirection, NodeType } from './node';
 
 export class Block extends Node {
 
-  constructor(name: string, children: Node[]) {
-    super(name, NodeType.Block, children);
+  constructor(name: string, direction: NodeDirection, children: Node[]) {
+    super(name, NodeType.Block, direction, children);
   }
 }
