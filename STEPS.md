@@ -7,6 +7,8 @@
 - Architecture the single page application: classes and components
 - Implement hierarchical node structure with a Node component
 - Show the nodes's mappings with a pipe
+- Investigate Dragula: Can I use it for showing a link?
+- Drag a node from input structure to output structure.
 
 # Next
-- Show the input nodes' mappings with a link
+- Can I show a hierarchical node structure with Dragula?

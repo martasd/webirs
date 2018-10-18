@@ -1,4 +1,4 @@
-<p> {{ node.name }} => {{ allLinks | filterByNode: node }}</p>
+<div class="node">{{ node.name }}</div>
 <ul *ngIf="node.children">
   <li *ngFor="let child of node.children">
     <app-node [node]="child" [allLinks]="allLinks"></app-node>

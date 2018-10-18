@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Block } from '../block';
-import { Link } from '../link';
-import { NodeDirection } from '../node';
-import { SourceStructure } from '../source-structure';
-import { TargetStructure } from '../target-structure';
 import { DragulaService } from 'ng2-dragula';
+import { Block } from '../block';
+import { NodeDirection } from '../node';
 
 @Component({
-  selector: 'app-structure-mapper',
-  templateUrl: './structure-mapper.component.html',
-  styleUrls: ['./structure-mapper.component.css']
+  selector: 'app-dragula-mapper',
+  templateUrl: './dragula-mapper.component.html',
+  styleUrls: ['./dragula-mapper.component.css']
 })
-export class StructureMapperComponent implements OnInit {
+export class DragulaMapperComponent implements OnInit {
 
-  // Create test nodes
+  // Test with real nodes
   sourceChildren = [
     new Block('nick', NodeDirection.Input, [
       new Block('nick\'s child1', NodeDirection.Input, [
@@ -27,20 +24,26 @@ export class StructureMapperComponent implements OnInit {
       new Block('kevin\'s child2', NodeDirection.Input, null)
     ])
   ];
+
   targetChildren = [
     new Block('roger', NodeDirection.Output, null),
     new Block('novak', NodeDirection.Output, null)
   ];
 
-  sourceRoot = new Block('john', NodeDirection.Input, this.sourceChildren);
-  targetRoot = new Block('bjorn', NodeDirection.Output, this.targetChildren);
 
-  source = new SourceStructure(this.sourceRoot);
-  target = new TargetStructure(this.targetRoot);
+  // Test with test vamps
+  vamps = [
+    { name: "Bad Vamp" },
+    { name: "Petrovitch the Slain" },
+    { name: "Bob of the Everglades" },
+    { name: "The Optimistic Reaper" }
+  ];
 
-  testLinks = [
-    new Link(this.sourceRoot, this.targetRoot, null),
-    new Link(this.sourceChildren[0], this.targetChildren[0], null)
+  vamps2 = [
+    { name: "Dracula" },
+    { name: "Kurz" },
+    { name: "Vladislav" },
+    { name: "Deacon" }
   ];
 
   constructor(private dragulaService: DragulaService) {
@@ -55,5 +58,7 @@ export class StructureMapperComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
 }

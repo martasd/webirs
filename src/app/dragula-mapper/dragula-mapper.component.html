@@ -1,0 +1,14 @@
+<p>
+  dragula-mapper works!
+</p>
+
+<!-- Test Dragula -->
+<div class="flex">
+  <div class="container" dragula="NODES" [(dragulaModel)]="sourceChildren">
+    <div class="vamp" *ngFor="let child of sourceChildren">{{ child.name }}</div>
+  </div>
+
+  <div class="container" dragula="NODES" [(dragulaModel)]="targetChildren">
+    <div class="vamp" *ngFor="let child of targetChildren">{{ child.name }}</div>
+  </div>
+</div>
