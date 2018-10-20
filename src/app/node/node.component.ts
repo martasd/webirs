@@ -3,14 +3,13 @@ import { Link } from '../link';
 import { Node } from '../node';
 
 @Component({
-  selector: 'app-node',
+  selector: '[app-tree]',
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.css']
 })
-export class NodeComponent implements OnInit {
+export class TreeComponent implements OnInit {
 
-  @Input() node: Node;
-  @Input() allLinks: Link[];
+  @Input() tree: Node[];
 
   constructor() { }
 

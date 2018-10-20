@@ -35,16 +35,19 @@ export class StructureMapperComponent implements OnInit {
   sourceRoot = new Block('john', NodeDirection.Input, this.sourceChildren);
   targetRoot = new Block('bjorn', NodeDirection.Output, this.targetChildren);
 
+  sourceTree = [this.sourceRoot];
+  targetTree = [this.targetRoot];
+
   source = new SourceStructure(this.sourceRoot);
   target = new TargetStructure(this.targetRoot);
 
+  // Create test links
   testLinks = [
     new Link(this.sourceRoot, this.targetRoot, null),
     new Link(this.sourceChildren[0], this.targetChildren[0], null)
   ];
 
   constructor(private dragulaService: DragulaService) {
-    // use these if you want
 
     this.dragulaService.createGroup("NODES", {
       // ...

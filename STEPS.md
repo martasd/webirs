@@ -9,6 +9,7 @@
 - Show the nodes's mappings with a pipe
 - Investigate Dragula: Can I use it for showing a link?
 - Drag a node from input structure to output structure.
+- Show a hierarchical node structure with Dragula?
 
 # Next
-- Can I show a hierarchical node structure with Dragula?
+* Create a node mapping from input node to existing output node.

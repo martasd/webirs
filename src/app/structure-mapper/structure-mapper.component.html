@@ -3,17 +3,6 @@
 </h2>
 
 <div class="flex">
-  <ul class="container" dragula="NODES" [(dragulaModel)]="source.root">
-    <app-node [node]="source.root" [allLinks]="testLinks"></app-node>
-  </ul>
-  <div class="container" dragula="NODES" [(dragulaModel)]="target.root">
-    <app-node [node]="target.root" [allLinks]="testLinks"></app-node>
-  </div>
+  <ul class="container" app-tree [tree]="sourceTree" dragula="NODES" [(dragulaModel)]="sourceTree"></ul>
+  <ul class="container" app-tree [tree]="targetTree" dragula="NODES" [(dragulaModel)]="targetTree"></ul>
 </div>
-
-<!-- <p>Source structure:</p> -->
-<!-- <app-node [node]="source.root" [allLinks]="testLinks"></app-node> -->
-
-
-<!-- <p>Target structure:</p> -->
-<!-- <app-node [node]="target.root" [allLinks]="testLinks"></app-node> -->
