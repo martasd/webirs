@@ -1,5 +1,5 @@
 <div class="node">{{ node.name }}</div>
-<ul *ngIf="node.children">
+<ul *ngIf="node.children" dragula="NODES" [(dragulaModel)]="node.children">
   <li *ngFor="let child of node.children">
     <app-node [node]="child" [allLinks]="allLinks"></app-node>
   </li>

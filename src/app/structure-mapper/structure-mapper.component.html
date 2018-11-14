@@ -3,12 +3,16 @@
 </h2>
 
 <div class="flex">
-  <ul class="container" dragula="NODES" [(dragulaModel)]="source.root">
-    <app-node [node]="source.root" [allLinks]="testLinks"></app-node>
+  <ul class="container" dragula="NODES" [(dragulaModel)]="sourceList">
+    <li *ngFor="let child of sourceList">
+      <app-node [node]="child" [allLinks]="testLinks"></app-node>
+    </li>
   </ul>
-  <div class="container" dragula="NODES" [(dragulaModel)]="target.root">
-    <app-node [node]="target.root" [allLinks]="testLinks"></app-node>
-  </div>
+  <!-- <ul>
+    <li>
+      <app-node class="container" [node]="target.root" [allLinks]="testLinks" dragula="NODES" [(dragulaModel)]="target.root"></app-node>
+    </li>
+  </ul> -->
 </div>
 
 <!-- <p>Source structure:</p> -->

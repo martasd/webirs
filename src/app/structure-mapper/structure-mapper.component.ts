@@ -34,6 +34,8 @@ export class StructureMapperComponent implements OnInit {
 
   sourceRoot = new Block('john', NodeDirection.Input, this.sourceChildren);
   targetRoot = new Block('bjorn', NodeDirection.Output, this.targetChildren);
+  sourceList = [this.sourceRoot];
+  targetList = [this.targetRoot];
 
   source = new SourceStructure(this.sourceRoot);
   target = new TargetStructure(this.targetRoot);
