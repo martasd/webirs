@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { Block } from '../block';
 import { Link } from '../link';
 import { NodeDirection } from '../node';
@@ -12,6 +12,8 @@ import { DragulaService } from 'ng2-dragula';
   styleUrls: ['./structure-mapper.component.css']
 })
 export class StructureMapperComponent implements OnInit {
+
+  @ViewChildren("sourceRef") sourceRef;
 
   // Create test nodes
   sourceChildren = [
@@ -40,11 +42,7 @@ export class StructureMapperComponent implements OnInit {
   source = new SourceStructure(this.sourceRoot);
   target = new TargetStructure(this.targetRoot);
 
-  // Create test links
-  testLinks = [
-    new Link(this.sourceRoot, this.targetRoot, null),
-    new Link(this.sourceChildren[0], this.targetChildren[0], null)
-  ];
+  linksMap = new Map();
 
   constructor(private dragulaService: DragulaService) {
 
@@ -55,7 +53,30 @@ export class StructureMapperComponent implements OnInit {
     this.dragulaService.dropModel("NODES").subscribe(args => {
       console.log(args);
     });
+
+    // Initialize links map
+    this.linksMap.set(this.sourceRoot, this.targetRoot);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+
+  }
+
+  ngAfterViewInit() {
+
+    console.log(this.sourceRef.nativeElement.textContent);
+    // TODO
+    // Iterate through refNodes of the source tree 
+
+    // Retrieve the source node's links from the Links Map
+    // if (this.linksMap.has(this.node)) {
+    //   this.linksMap.get(this.node);
+
+    // Traverse the target tree to find the target refNode
+
+    // Draw the link
+    // var line = new LeaderLine(this.start.nativeElement, this.end.nativeElement);
+
+  }
 }

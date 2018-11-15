@@ -5,7 +5,7 @@
 <div class="flex">
   <ul class="container" dragula="NODES" [(dragulaModel)]="sourceList">
     <li *ngFor="let child of sourceList">
-      <app-node [node]="child" [allLinks]="testLinks"></app-node>
+      <app-node [node]="child" #sourceRef></app-node>
     </li>
   </ul>
   <!-- <ul>

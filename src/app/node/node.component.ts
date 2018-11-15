@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Link } from '../link';
 import { Node } from '../node';
 
@@ -10,11 +10,15 @@ import { Node } from '../node';
 export class NodeComponent implements OnInit {
 
   @Input() node: Node;
-  @Input() allLinks: Link[];
+
+  @ViewChild("nodeRef") nodeRef;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
+  ngAfterViewInit() {
+  }
 }
