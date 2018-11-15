@@ -13,6 +13,6 @@
 * Show a hierarchical node structure with Dragula?
 * Reference an element from .ts file
 * Implement @ViewChildren
+* Create a node mappings from input nodes to output nodes
 
 # TODO
-* Create a node mapping from input node to existing output node in structure-mapper

@@ -8,16 +8,9 @@
       <app-node [node]="child" #sourceRef></app-node>
     </li>
   </ul>
-  <!-- <ul>
-    <li>
-      <app-node class="container" [node]="target.root" [allLinks]="testLinks" dragula="NODES" [(dragulaModel)]="target.root"></app-node>
+  <ul class="container" dragula="NODES" [(dragulaModel)]="targetList">
+    <li *ngFor="let child of targetList">
+      <app-node [node]="child" #targetRef></app-node>
     </li>
-  </ul> -->
+  </ul>
 </div>
-
-<!-- <p>Source structure:</p> -->
-<!-- <app-node [node]="source.root" [allLinks]="testLinks"></app-node> -->
-
-
-<!-- <p>Target structure:</p> -->
-<!-- <app-node [node]="target.root" [allLinks]="testLinks"></app-node> -->

@@ -6,6 +6,7 @@ import { SourceStructure } from '../source-structure';
 import { TargetStructure } from '../target-structure';
 import { DragulaService } from 'ng2-dragula';
 
+declare var LeaderLine: any;
 @Component({
   selector: 'app-structure-mapper',
   templateUrl: './structure-mapper.component.html',
@@ -14,6 +15,7 @@ import { DragulaService } from 'ng2-dragula';
 export class StructureMapperComponent implements OnInit {
 
   @ViewChildren("sourceRef") sourceRef;
+  @ViewChildren("targetRef") targetRef;
 
   // Create test nodes
   sourceChildren = [
@@ -33,16 +35,52 @@ export class StructureMapperComponent implements OnInit {
     new Block('roger', NodeDirection.Output, null),
     new Block('novak', NodeDirection.Output, null)
   ];
-
   sourceRoot = new Block('john', NodeDirection.Input, this.sourceChildren);
   targetRoot = new Block('bjorn', NodeDirection.Output, this.targetChildren);
   sourceList = [this.sourceRoot];
   targetList = [this.targetRoot];
-
   source = new SourceStructure(this.sourceRoot);
   target = new TargetStructure(this.targetRoot);
-
   linksMap = new Map();
+
+  // Find the target reference
+  // input: targetNodeComponentRef- target NodeComponent
+  findTargetRef(targetNodeComponentRef, targetNode) {
+
+    if (targetNodeComponentRef.node === targetNode) {
+      return targetNodeComponentRef.nodeRef;
+    }
+    var children = targetNodeComponentRef.childrenRef.toArray();
+    for (var nodeComponentRef of children) {
+      var targetRef = this.findTargetRef(nodeComponentRef, targetNode);
+
+      if (targetRef) {
+        return targetRef;
+      }
+    };
+  }
+
+  // For each node draw a link to its target
+  // input: sourceNodeRef- source NodeComponent
+  drawLinks(sourceNodeComponentRef) {
+
+    // Retrieve the source node's links from the Links Map
+    var sourceNode = sourceNodeComponentRef.node;
+    if (this.linksMap.has(sourceNode)) {
+      // TODO: Right now, assume there is only one target node
+      var targetNode = this.linksMap.get(sourceNode);
+
+      var sourceNodeRef = sourceNodeComponentRef.nodeRef;
+      var targetNodeRef = this.findTargetRef(this.targetRef.first, targetNode);
+
+      // Draw the link
+      var line = new LeaderLine(sourceNodeRef.nativeElement, targetNodeRef.nativeElement);
+    }
+
+    sourceNodeComponentRef.childrenRef.forEach(NodeComponentRef => {
+      this.drawLinks(NodeComponentRef);
+    });
+  }
 
   constructor(private dragulaService: DragulaService) {
 
@@ -56,27 +94,15 @@ export class StructureMapperComponent implements OnInit {
 
     // Initialize links map
     this.linksMap.set(this.sourceRoot, this.targetRoot);
+    this.linksMap.set(this.sourceChildren[0], this.targetChildren[0])
+    this.linksMap.set(this.sourceChildren[1], this.targetChildren[1])
   }
 
   ngOnInit() {
-
-
   }
 
   ngAfterViewInit() {
-
-    console.log(this.sourceRef.nativeElement.textContent);
-    // TODO
     // Iterate through refNodes of the source tree 
-
-    // Retrieve the source node's links from the Links Map
-    // if (this.linksMap.has(this.node)) {
-    //   this.linksMap.get(this.node);
-
-    // Traverse the target tree to find the target refNode
-
-    // Draw the link
-    // var line = new LeaderLine(this.start.nativeElement, this.end.nativeElement);
-
+    this.drawLinks(this.sourceRef.first);
   }
 }
