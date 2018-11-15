@@ -1,5 +1,0 @@
-<li *ngFor="let node of tree">
-  <div #nodeRef>{{ node.name }}</div>
-  <ul *ngIf="node.children" app-nodes [tree]="node.children" dragula="NODES" [(dragulaModel)]="node.children"
-    #childrenRef></ul>
-</li>
