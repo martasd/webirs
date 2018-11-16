@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { Link } from '../link';
 import { Node } from '../node';
 
 @Component({

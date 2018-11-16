@@ -16,3 +16,4 @@
 * Create a node mappings from input nodes to output nodes
 
 # TODO
+* Redraw the links with the node when it is dragged

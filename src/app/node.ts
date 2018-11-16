@@ -1,7 +1,7 @@
 
-export enum NodeType {Block, Field, Sequence, Choice, Group}
+export enum NodeType { Block, Field, Sequence, Choice, Group }
 
-export enum NodeDirection {Input, Output}
+export enum NodeDirection { Input, Output }
 
 export abstract class Node {
 
@@ -10,5 +10,5 @@ export abstract class Node {
     public type: NodeType,
     public direction: NodeDirection,
     public children: Node[]
-    ) {}
+  ) { }
 }
