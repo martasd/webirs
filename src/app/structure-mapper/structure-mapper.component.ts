@@ -7,6 +7,7 @@ import { TargetStructure } from '../target-structure';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { Link } from '../link';
+// import { LeaderLine } from 'leader-line';
 
 declare var LeaderLine: any;
 @Component({
@@ -80,7 +81,10 @@ export class StructureMapperComponent implements OnInit {
       var sourceElement = sourceNodeRef.nativeElement;
       var targetElement = targetNodeRef.nativeElement;
 
-      link.line = new LeaderLine(sourceElement, targetElement);
+      link.line = new LeaderLine(sourceElement, targetElement, {
+        startPlug: 'disc',
+        dash: { animation: true }
+      });
       this.links.lineMap.set(sourceElement.textContent, link.line);
     }
 
@@ -109,6 +113,22 @@ export class StructureMapperComponent implements OnInit {
           line.hide();
           // console.log(line);
         }
+      }));
+
+    this.subs.add(this.dragulaService.drop("NODES")
+      .subscribe(({ name, el, target, source, sibling }) => {
+
+        var elText = el.firstChild.firstChild.textContent;
+        if (this.links.lineMap.has(elText)) {
+          var line = this.links.lineMap.get(elText);
+          line.show();
+        }
+
+        // Redraw all lines
+        this.links.lineMap.forEach(curLine => {
+          curLine.position();
+        });
+
       }));
 
     // Initialize links map
