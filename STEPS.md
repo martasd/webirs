@@ -14,6 +14,16 @@
 * Reference an element from .ts file
 * Implement @ViewChildren
 * Create a node mappings from input nodes to output nodes
+* Redraw the links with the node when it is dragged
+* Make the line follow the HTML element
 
 # TODO
-* Redraw the links with the node when it is dragged
+* Draw a line when a source node is dropped onto a target node.
+    * Make a node copyable
+    * Each target node is a droppable area
+    * When a source node is dropped onto droppable area
+        * Do not create a new target node
+        * Create a new link between source and target
+
+# Questions
+* Why is there a disconnected element when the existing lines are redrawn? Which one is the disconnected element actually?
