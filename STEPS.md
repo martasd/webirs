@@ -16,4 +16,8 @@
 * Create a node mappings from input nodes to output nodes
 
 # TODO
-* Redraw the links with the node when it is dragged
+* Draw a line when a source node is dropped onto a target node.
+    * Can each target node be a droppable area- container?
+    * Can I drop a node without moving it   ?
+    * When a source node is dropped onto droppable area
+        * Create a new link between source and target

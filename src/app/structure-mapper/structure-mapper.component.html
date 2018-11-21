@@ -3,12 +3,12 @@
 </h2>
 
 <div class="flex">
-  <ul class="container" dragula="NODES" [(dragulaModel)]="sourceList">
+  <ul class="container" id="input" dragula="NODES" [(dragulaModel)]="sourceList">
     <li *ngFor="let child of sourceList">
       <app-node [node]="child" #sourceRef></app-node>
     </li>
   </ul>
-  <ul class="container" dragula="NODES" [(dragulaModel)]="targetList">
+  <ul class="container" id="output" dragula="NODES" [(dragulaModel)]="targetList">
     <li *ngFor="let child of targetList">
       <app-node [node]="child" #targetRef></app-node>
     </li>
