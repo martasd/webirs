@@ -3,7 +3,7 @@ export enum NodeType { Block, Field, Sequence, Choice, Group }
 
 export enum NodeDirection { Input, Output }
 
-export abstract class Node {
+export class Node {
 
   constructor(
     public name: string,
