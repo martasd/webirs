@@ -21,24 +21,29 @@ export class StructureMapperComponent implements OnInit {
 
   // Create test data structures
   sourceChildren = [
-    new Node('nick', NodeType.Block, NodeDirection.Input, [
-      new Node('nick\'s child1', NodeType.Block, NodeDirection.Input, [
-        new Node('nick\'s grandchild1', NodeType.Block, NodeDirection.Input, null),
-        new Node('nick\'s grandchild2', NodeType.Block, NodeDirection.Input, null)
+    new Node('50 A/F/K', NodeType.Block, NodeDirection.Input, [
+      new Node('F50A', NodeType.Block, NodeDirection.Input, [
+        new Node('Account ID', NodeType.Block, NodeDirection.Input, null),
+        new Node('BIC', NodeType.Block, NodeDirection.Input, null)
       ]),
-      new Node('nick\'s child2', NodeType.Block, NodeDirection.Input, null)
+      new Node('F50F', NodeType.Block, NodeDirection.Input, null)
     ]),
-    new Node('kevin', NodeType.Block, NodeDirection.Input, [
-      new Node('kevin\'s child1', NodeType.Block, NodeDirection.Input, null),
-      new Node('kevin\'s child2', NodeType.Block, NodeDirection.Input, null)
-    ])
+    new Node('32A', NodeType.Block, NodeDirection.Input, [
+      new Node('F32A', NodeType.Block, NodeDirection.Input, [
+        new Node('Currency', NodeType.Block, NodeDirection.Input, null),
+        new Node('Amount', NodeType.Block, NodeDirection.Input, null)
+      ])])
   ];
   targetChildren = [
-    new Node('roger', NodeType.Block, NodeDirection.Output, null),
-    new Node('novak', NodeType.Block, NodeDirection.Output, null)
+    new Node('DbtrAcct', NodeType.Block, NodeDirection.Output, [
+      new Node('AcctID', NodeType.Block, NodeDirection.Output, null),
+      new Node('BIC', NodeType.Block, NodeDirection.Output, null)]),
+    new Node('IntrBkSttlmt', NodeType.Block, NodeDirection.Output, [
+      new Node('IntrBkSttlmAmt', NodeType.Block, NodeDirection.Output, null),
+      new Node('IntrBkSttlmAmt@Ccy', NodeType.Block, NodeDirection.Output, null)])
   ];
-  sourceRoot = new Node('john', NodeType.Block, NodeDirection.Input, this.sourceChildren);
-  targetRoot = new Node('bjorn', NodeType.Block, NodeDirection.Output, this.targetChildren);
+  sourceRoot = new Node('MT103', NodeType.Block, NodeDirection.Input, this.sourceChildren);
+  targetRoot = new Node('Pacs 008', NodeType.Block, NodeDirection.Output, this.targetChildren);
   sourceList = [this.sourceRoot];
   targetList = [this.targetRoot];
   source = new SourceStructure(this.sourceRoot);
@@ -133,9 +138,9 @@ export class StructureMapperComponent implements OnInit {
       }));
 
     // Initialize links map
-    this.links.linksMap.set(this.sourceRoot, new Link(this.targetRoot, null, null));
-    this.links.linksMap.set(this.sourceChildren[0], new Link(this.targetChildren[0], null, null));
-    this.links.linksMap.set(this.sourceChildren[1], new Link(this.targetChildren[1], null, null));
+    this.links.linksMap.set(this.sourceChildren[0].children[0].children[0], new Link(this.targetChildren[0].children[0], null, null));
+    this.links.linksMap.set(this.sourceChildren[0].children[0].children[1], new Link(this.targetChildren[0].children[1], null, null));
+    this.links.linksMap.set(this.sourceChildren[1].children[0].children[0], new Link(this.targetChildren[1].children[1], null, null));
   }
 
   ngOnInit() {
