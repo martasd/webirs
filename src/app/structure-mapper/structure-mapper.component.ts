@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
-import { Block } from '../block';
-import { Links } from '../links';
-import { NodeDirection } from '../node';
+import { Component, OnInit, ViewChildren } from '@angular/core'; import { Links } from '../links';
+import { NodeType, NodeDirection, Node } from '../node';
 import { SourceStructure } from '../source-structure';
 import { TargetStructure } from '../target-structure';
 import { DragulaService } from 'ng2-dragula';
@@ -23,24 +21,24 @@ export class StructureMapperComponent implements OnInit {
 
   // Create test data structures
   sourceChildren = [
-    new Block('nick', NodeDirection.Input, [
-      new Block('nick\'s child1', NodeDirection.Input, [
-        new Block('nick\'s grandchild1', NodeDirection.Input, null),
-        new Block('nick\'s grandchild2', NodeDirection.Input, null)
+    new Node('nick', NodeType.Block, NodeDirection.Input, [
+      new Node('nick\'s child1', NodeType.Block, NodeDirection.Input, [
+        new Node('nick\'s grandchild1', NodeType.Block, NodeDirection.Input, null),
+        new Node('nick\'s grandchild2', NodeType.Block, NodeDirection.Input, null)
       ]),
-      new Block('nick\'s child2', NodeDirection.Input, null)
+      new Node('nick\'s child2', NodeType.Block, NodeDirection.Input, null)
     ]),
-    new Block('kevin', NodeDirection.Input, [
-      new Block('kevin\'s child1', NodeDirection.Input, null),
-      new Block('kevin\'s child2', NodeDirection.Input, null)
+    new Node('kevin', NodeType.Block, NodeDirection.Input, [
+      new Node('kevin\'s child1', NodeType.Block, NodeDirection.Input, null),
+      new Node('kevin\'s child2', NodeType.Block, NodeDirection.Input, null)
     ])
   ];
   targetChildren = [
-    new Block('roger', NodeDirection.Output, null),
-    new Block('novak', NodeDirection.Output, null)
+    new Node('roger', NodeType.Block, NodeDirection.Output, null),
+    new Node('novak', NodeType.Block, NodeDirection.Output, null)
   ];
-  sourceRoot = new Block('john', NodeDirection.Input, this.sourceChildren);
-  targetRoot = new Block('bjorn', NodeDirection.Output, this.targetChildren);
+  sourceRoot = new Node('john', NodeType.Block, NodeDirection.Input, this.sourceChildren);
+  targetRoot = new Node('bjorn', NodeType.Block, NodeDirection.Output, this.targetChildren);
   sourceList = [this.sourceRoot];
   targetList = [this.targetRoot];
   source = new SourceStructure(this.sourceRoot);
@@ -70,8 +68,8 @@ export class StructureMapperComponent implements OnInit {
 
     // Retrieve the source node's links from the Links Map
     var sourceNode = sourceNodeComponentRef.node;
-    if (this.links.map.has(sourceNode)) {
-      var link = this.links.map.get(sourceNode);
+    if (this.links.linksMap.has(sourceNode)) {
+      var link = this.links.linksMap.get(sourceNode);
 
       var sourceNodeRef = sourceNodeComponentRef.nodeRef;
       // TODO: Right now, assume there is only one target node
@@ -96,7 +94,11 @@ export class StructureMapperComponent implements OnInit {
   constructor(private dragulaService: DragulaService) {
 
     this.dragulaService.createGroup("NODES", {
-      // ...
+
+      // Avoid dragging from output to input structure
+      accepts: (el, target, source, sibling) => {
+        return !(target.id === 'input' && source.id === 'output');
+      }
     });
 
     this.dragulaService.dropModel("NODES").subscribe(args => {
@@ -111,39 +113,41 @@ export class StructureMapperComponent implements OnInit {
         if (this.links.lineMap.has(elText)) {
           var line = this.links.lineMap.get(elText);
           line.hide();
-          // console.log(line);
         }
       }));
 
     this.subs.add(this.dragulaService.drop("NODES")
       .subscribe(({ name, el, target, source, sibling }) => {
 
-        var elText = el.firstChild.firstChild.textContent;
-        if (this.links.lineMap.has(elText)) {
-          var line = this.links.lineMap.get(elText);
-          line.show();
+        // Remove all lines
+        for (let link of this.links.linksMap.values()) {
+          if (link.line != null) {
+            link.line.remove();
+            link.line = null;
+          }
         }
+        this.links.lineMap.clear();
 
-        // Redraw all lines
-        this.links.lineMap.forEach(curLine => {
-          curLine.position();
-        });
-
+        // Recreate all lines
+        this.drawLinks(this.sourceRef.first);
       }));
 
     // Initialize links map
-    this.links.map.set(this.sourceRoot, new Link(this.targetRoot, null, null));
-    this.links.map.set(this.sourceChildren[0], new Link(this.targetChildren[0], null, null));
-    this.links.map.set(this.sourceChildren[1], new Link(this.targetChildren[1], null, null));
+    this.links.linksMap.set(this.sourceRoot, new Link(this.targetRoot, null, null));
+    this.links.linksMap.set(this.sourceChildren[0], new Link(this.targetChildren[0], null, null));
+    this.links.linksMap.set(this.sourceChildren[1], new Link(this.targetChildren[1], null, null));
   }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    // Iterate through refNodes of the source tree 
+    // Draw links starting from the tree source node
     this.drawLinks(this.sourceRef.first);
+  }
 
-    //console.log(this.links.lineMap);
+  ngOnDestroy() {
+    // Destroy all the subscriptions at once
+    this.subs.unsubscribe();
   }
 }
